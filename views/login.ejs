@@ -52,6 +52,7 @@
             <div class="d-flex mt-3">
                 <button type="submit" class="btn btn-primary m-auto" style="width: 30%;"> Login</button>
             </div>
+            <div id="error-div" class="text-danger text-center mt-3"></div>
       </form>
     </div>
     </div>
@@ -79,7 +80,9 @@
       }
     )
     const data = await res.json();
-    console.log(data)
+    console.log(data.message)
+    document.getElementById('error-div').innerHTML=data.message
+
     if(data.email){
       location.assign('/')
     }

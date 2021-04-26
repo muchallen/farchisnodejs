@@ -38,22 +38,15 @@ module.exports.login_post=(req,res)=>{
     //login credentials 
     const credentials = req.body
     //authenticanting
-    try{
+    
     auth.signInWithEmailAndPassword(credentials.email,credentials.password).then(cred=>{
         if(cred.user.email){
             const token = createWebToken(cred.user.email)
             res.cookie('jwt', token,{httpOnly:true, maxAge:maxAge*1000})
             res.status(200).send({"email":cred.user.email});
         }
-        
-        
-    })
-   
-    
-}
-catch(err){
-    res.status(400).send(err)
-}
+    }).catch(err=>res.status(400).send({"message" :"login failed verify your username and password"}))
+
     
 
     
