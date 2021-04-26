@@ -1,0 +1,280 @@
+<%- include('partials/header'); -%>
+<link href="css/styles.css" rel="stylesheet" />
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<%- include('partials/header'); -%>
+<div class="main-panel">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+    <div class="container-fluid">
+      <div class="navbar-wrapper">
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="navbar-toggler-icon icon-bar"></span>
+        <span class="navbar-toggler-icon icon-bar"></span>
+        <span class="navbar-toggler-icon icon-bar"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="javascript:;">
+              <i class="material-icons">dashboard</i>
+              <p class="d-lg-none d-md-block">
+                Stats
+              </p>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="material-icons">notifications</i>
+              <span class="notification">5</span>
+              <p class="d-lg-none d-md-block">
+                Some Actions
+              </p>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Mike John responded to your email</a>
+              <a class="dropdown-item" href="#">You have 5 new tasks</a>
+              <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+              <a class="dropdown-item" href="#">Another Notification</a>
+              <a class="dropdown-item" href="#">Another One</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="material-icons">person</i>
+              <p class="d-lg-none d-md-block">
+                Account
+              </p>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+              <a class="dropdown-item" href="#">Profile</a>
+              <a class="dropdown-item" href="#">Settings</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Log out</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+<div class="content">
+  
+    <div class="container">
+        <div id="contact-list" class="chate-liste">            <div class="m-info">
+ 
+
+</div>
+<div class="search-box">
+ <h3 class="sender-name">Chats</h3>
+
+</div>
+<hr>
+<div  class="ms-a chat-active">
+ <div class="avatar">
+     <img src="images/iconfinder_afro_woman_female_person_4043231.png" width="50px" alt="">
+ </div>
+ <div class="mesg-info ">
+     <div class="ms-info">
+         <span class=" sender-name"> Trixie Mattel</span>
+         <span class="time"> just now <span class="msge-num ms-active ">2</span></span>
+     </div>
+     <div class="action">
+         <span>Typing...</span>
+     </div>
+ </div>
+</div>
+<div class="new-chate">
+ <span>+</span>
+</div>
+
+
+        </div>
+        <div class="chate">
+            <div class="chate-header">
+                <div class="header-content">
+                <div class="sender-avatar">
+                    <img src="images/iconfinder_afro_woman_female_person_4043231.png" width="50px" alt="">
+                </div>
+                <div class="sender-action">
+                    <h3>Trixie Mattel</h3>
+                    <span>Typing...</span>
+                </div>
+                <div class="icons">
+                 <i class='fas fa-user-plus'></i>
+                 <i class='fas fa-search'></i>
+                 <i class='fas fa-ellipsis-v'></i>
+                </div>
+             </div>
+            </div>
+            <div class="chate-body">
+             <!-- <div class="message-sender">
+                 <div class="message-sender-avatar">
+                     <img src="images/iconfinder_anime_spirited_away_no_face_nobody_4043233.png" width="50px" alt="">
+                 </div>
+                 <div class="message-sender-message  ">
+                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
+                 </div>
+                 <div class="message-sender-icon"><i class=></i></div>
+                 
+             </div>
+             <div class="message-recever">
+                 <div class="message-sender-avatar">
+                     <img src="images/iconfinder_afro_woman_female_person_4043231.png" width="50px" alt="">
+                 </div>
+                 <div class="message-sender-message rece">
+                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
+                 </div>
+                 <div class="message-sender-icon"><i class='fas fa-heart'></i></div>
+
+             </div>
+             <div class="message-sender">
+                 <div class="message-sender-avatar">
+                     <img src="images/iconfinder_anime_spirited_away_no_face_nobody_4043233.png" width="50px" alt="">
+                 </div>
+                 <div class="message-sender-message ">
+                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
+                 </div>
+                 <div class="message-sender-icon"><i class=></i></div>
+                 
+             </div>
+             <div class="message-recever">
+                 <div class="message-sender-avatar">
+                     <img src="images/iconfinder_afro_woman_female_person_4043231.png" width="50px" alt="">
+                 </div>
+                 <div class="message-sender-message rece">
+                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
+                 </div>
+                 <div class="message-sender-icon"><i class='fas fa-heart'></i></div>
+
+             </div>
+             <div class="message-sender">
+                 <div class="message-sender-avatar">
+                     <img src=" images/iconfinder_anime_spirited_away_no_face_nobody_4043233.png" width="50px" alt="">
+                 </div>
+                 <div class="message-sender-message ">
+                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </p>
+                 </div>
+                 <div class="message-sender-icon"><i class=></i></div>
+                 
+             </div> -->
+             </div>
+             <div class="message-box">
+                 <div class="message-box-aria">
+                     <input type="text" id="message-textbox" placeholder="Type a message..">
+                     <button  onClick="sendMessage()" >send</button>
+                 </div>
+           
+                
+             
+     </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var contacts = JSON.parse(<%- JSON.stringify(contacts) %>)
+        var chatdetails = JSON.parse(<%- JSON.stringify(chatdetails) %>)
+        $(document).ready(function() {
+            console.log(contacts)
+            var divContacts = document.querySelector('#contact-list')
+            // append list of users 
+            contacts.forEach(contact=>{
+                
+                var div1 = document.createElement("div")
+                div1.className="ms-a chat-active"
+                div1.innerHTML =` 
+                <div class="avatar">
+                    <img src="images/iconfinder_afro_woman_female_person_4043231.png" width="50px" alt="">
+                </div>
+                <div class="mesg-info ">
+                    <div class="ms-info" onClick="showMessage('${contact}')">
+                        <span class=" sender-name">  ${contact}</span>
+                        <span class="time"> just now <span class="msge-num ms-active ">2</span></span>
+                    </div>
+                    <div class="action">
+                        <span>Typing...</span>
+                    </div>
+                </div>
+                <br>
+               `
+               divContacts.append(div1)
+            })
+            
+                
+               
+
+                console.log(divContacts)
+            
+         
+        } );
+       
+        $(document).ready(function() {
+          navlinks= document.getElementsByClassName('nav-item'); 
+          for(var i =0; i<navlinks.length; i++){
+            var link = navlinks[i];
+            link.className="nav-item"
+          }
+          document.getElementById('messages').className='nav-item active'
+       
+         } );
+          
+         function showMessage( sender){
+            console.log(chatdetails)
+
+         }
+
+         function sendMessage(){
+             var message = document.querySelector('#message-textbox').value;
+              var sender = "farchis";
+
+
+         fetch('/messages', {
+            method: 'POST', // or 'PUT'
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({message,sender}),
+          })
+          .then(response => response.json())
+          .then(data => {
+            alert('Success:'+ data.message )
+            console.log('Success:' ,data, data.status);
+            setTimeout(()=>{
+              location.reload();
+            },3000);
+          })
+          .catch((error) => {
+            alert('Failed' + error.message)
+            console.error('Error:', error.message);
+            setTimeout(()=>{
+              location.reload();
+            },3000)
+          });
+              }
+
+
+    
+    
+        
+    
+       
+    </script>
+
+
+
+
+
+<%- include('partials/footer'); -%>
+
+
+
+
+
+
+
+
+
+
+
+
