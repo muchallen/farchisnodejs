@@ -1,6 +1,7 @@
 const firebase = require('firebase/app');
 const firebase_auth = require('firebase/auth');
 const jwt = require('jsonwebtoken')
+const firebase1 = require("firebase");
 
 
 
@@ -17,6 +18,7 @@ var firebaseConfig = {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
    const auth = firebase.auth();
+   const db = firebase1.firestore()
 
     const maxAge = 3*24*60*60
    const createWebToken= (email)=>{
@@ -34,7 +36,7 @@ module.exports.login_get=(req,res)=>{
 }
 module.exports.login_post=(req,res)=>{
    
-    res.cookie('authenticated', '1',{ maxAge: 240000});
+    
     //login credentials 
     const credentials = req.body
     //authenticanting
@@ -42,7 +44,7 @@ module.exports.login_post=(req,res)=>{
     auth.signInWithEmailAndPassword(credentials.email,credentials.password).then(cred=>{
         if(cred.user.email){
             const token = createWebToken(cred.user.email)
-            res.cookie('jwt', token,{httpOnly:true, maxAge:maxAge*1000})
+            res.cookie('jwtFarchis', token,{httpOnly:true, maxAge:maxAge*1000})
             res.status(200).send({"email":cred.user.email});
         }
     }).catch(err=>res.status(400).send({"message" :"login failed verify your username and password"}))
@@ -51,3 +53,35 @@ module.exports.login_post=(req,res)=>{
 
     
 }
+
+module.exports.logout_get=(req,res)=>{
+    auth.signOut().then(() => {
+        res.cookie('jwtFarchis',"logut",{httpOnly:true, maxAge:1*1000} )
+        res.redirect("/login")
+      }).catch((error) => {
+        res.status(401).send({"message": "logout failed" +error})
+      }); 
+}
+
+
+
+
+module.exports.signup_get=(req,res)=>{
+    
+    //res.cookie('authenticated','1', { maxAge: 240000, httpOnly: true });
+    res.render('signup')
+}
+module.exports.signup_post=(req,res)=>{
+    const credentials = req.body 
+    auth.createUserWithEmailAndPassword(credentials.email,credentials.password).then(cred=>{
+        if(cred.user.email){
+            db.collection('accounts').doc(cred.user.email).set({
+                email : cred.user.email
+            })
+            console.log(cred.user)
+            res.status(200).send({"message":"User Created","user":cred.user }) 
+        }
+    }).catch(err=>res.status(400).send({"message" :"signup failed" + err}))
+  
+}
+

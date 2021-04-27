@@ -21,11 +21,11 @@ module.exports.users_get=(req,res)=>{
 }
 module.exports.users_post=(req,res)=>{
     console.log(req.body.id)
-    db.collection("users").doc(req.body.id).delete().then(function() {
-        res.status(201).send({message:"Document successfully deleted!"})
-    }).catch(function(error) {
+    db.collection("users").doc(req.body.id).delete().then(()=> {
+        res.status(201).send({message:"User Record successfully deleted!"})
+    }).catch((error) =>{
         console.error("Error removing document: ", error);
-        res.status(404).send({message:"Error removing record"})
+        res.status(404).send({message:"Error removing user record"})
     });
 }
 
@@ -39,11 +39,10 @@ module.exports.vehicle_get=(req,res)=>{
 }
 module.exports.vehicle_post=(req,res)=>{
     console.log(req.body.id)
-    db.collection("cars").doc(req.body.id).delete().then(function() {
-        res.status(201).send({message:"Document successfully deleted!"})
-    }).catch(function(error) {
-        console.error("Error removing document: ", error);
-        res.status(404).send({message:"Error removing record"})
+    db.collection("cars").doc(req.body.id).delete().then(()=>
+        res.status(200).send({message:"Vehicle record is successfully deleted!"})
+    ).catch((error)=> {
+        res.status(404).send({message:"Error removing vehicle record"})
     });
 }
 
@@ -51,9 +50,7 @@ module.exports.towing_get=(req,res)=>{
     let users =  db.collection('tows').orderBy("date","desc").onSnapshot((snapshot) => {
      const userData = []
      snapshot.forEach((doc) => {
-     console.log(doc.data().date.toDate().toString())
-     userData.push({ ...doc.data(), id: doc.id ,ctime:doc.data().date.toDate().toString()})});
-     console.log(userData)
+     userData.push({ ...doc.data(), id: doc.id ,ctime: (doc.data().date.toDate().toString())})});
      const towingString = JSON.stringify(userData)
      res.render('towing',{databse:userData, Data2:towingString})
  })    
@@ -63,11 +60,11 @@ module.exports.towing_get=(req,res)=>{
 
 module.exports.towing_post=(req,res)=>{
     console.log(req.body.id)
-    db.collection("tows").doc(req.body.id).delete().then(function() {
-        res.status(201).send({message:"Document successfully deleted!"})
+    db.collection("tows").doc(req.body.id).delete().then(()=> {
+        res.status(201).send({message:"Towing record successfully deleted!"})
     }).catch(function(error) {
         console.error("Error removing document: ", error);
-        res.status(404).send({message:"Error removing record"})
+        res.status(404).send({message:"Error removing towing record"})
     });
     
     
@@ -83,11 +80,11 @@ module.exports.service_get=(req,res)=>{
 }
 module.exports.service_post=(req,res)=>{
     console.log(req.body.id)
-    db.collection("servs").doc(req.body.id).delete().then(function() {
-        res.status(201).send({message:"Document successfully deleted!"})
-    }).catch(function(error) {
+    db.collection("servs").doc(req.body.id).delete().then(()=> {
+        res.status(200).send({message:"Quotation Record successfully deleted!"})
+    }).catch((error) =>{
         console.error("Error removing document: ", error);
-        res.status(404).send({message:"Error removing record"})
+        res.status(404).send({message:"Error removing quotation record"})
     });
 }
 module.exports.events_get=(req,res)=>{
@@ -101,15 +98,15 @@ module.exports.events_get=(req,res)=>{
 }
 module.exports.events_post=(req,res)=>{
     console.log(req.body.id)
-    db.collection("events").doc(req.body.id).delete().then(function() {
-        res.status(201).send({message:"Document successfully deleted!"})
-    }).catch(function(error) {
+    db.collection("events").doc(req.body.id).delete().then(() =>{
+        res.status(201).send({message:"Even Record successfully deleted!"})
+    }).catch((error)=> {
         console.error("Error removing document: ", error);
-        res.status(404).send({message:"Error removing record"})
+        res.status(404).send({message:"Error removing event record"})
     });
 }
 
-module.exports.message_get=  async (req,res)=>  {
+module.exports.message_get=async (req,res)=>  {
   const userData = []
   const chatDetails =[]
  var itemsproccessed=0
@@ -125,9 +122,7 @@ module.exports.message_get=  async (req,res)=>  {
 
  if(users!==null){
    console.log(chatDetails)
- }
-
- 
+ } 
 }
 module.exports.message_post=(req,res)=>{
 //   let users =  db.collection('messages').onSnapshot((snapshot) => {
@@ -212,102 +207,101 @@ module.exports.home_get=(req,res)=>{
 //           }
 //  })   
 })  
-//  await db.collection('tows').onSnapshot((snapshot) => {
-//     allTowing = []
-//  snapshot.forEach((doc) => allTowing.push({ ...doc.data(), id: doc.id }));
-//  allTowing.forEach((towing)=>{
-//     switch(towing.date.substring(5,7)) {
-//         case "01":
-//           tjan.push(towing.date.substring(5,7))
-//           break;
-//         case "02":
+ await db.collection('tows').onSnapshot((snapshot) => {
+    allTowing = []
+ snapshot.forEach((doc) => allTowing.push({ ...doc.data(), id: doc.id ,ctime: (doc.data().date.toDate().toString())}));
+ allTowing.forEach((towing)=>{
+    switch(towing.ctime.substring(4,7)) {
+        case "Jan":
+          tjan.push(towing.ctime.substring(4,7))
+          break;
+        case "Feb":
+            tfeb.push(towing.ctime.substring(4,7))
+          break;
+        case "Mar":
+            tmar.push(towing.ctime.substring(4,7))
+          break;
+          case "Apr":
+            tapr.push(towing.ctime.substring(4,7))
+          break;
+          case "May":
+            tmay.push(towing.ctime.substring(4,7))
+          break;
+          case "Jun":
+            tjun.push(towing.ctime.substring(4,7))
+          break;
+          case "Jul":
+            tjuly.push(towing.ctime.substring(4,7))
+          break;
+          case "Aug":
+            taug.push(towing.ctime.substring(4,7))
+          break;
+          case "Sep":
+            tsep.push(towing.ctime.substring(4,7))
+          break;
+          case "Oct":
+            toct.push(towing.ctime.substring(4,7))
+          break;
+          case "Nov":
+            tnov.push(towing.ctime.substring(4,7))
+          break;
+          case "Dec":
+            tdec.push(towing.ctime.substring(4,7))
+          break;
+        default:
+            break;     
+          // code block
+      }
 
-//             tfeb.push(towing.date.substring(5,7))
-//           break;
-//         case "03":
-//             tmar.push(towing.date.substring(5,7))
-//           break;
-//           case "04":
-//             tapr.push(towing.date.substring(5,7))
-//           break;
-//           case "05":
-//             tmay.push(towing.date.substring(5,7))
-//           break;
-//           case "06":
-//             tjun.push(towing.date.substring(5,7))
-//           break;
-//           case "07":
-//             tjuly.push(towing.date.substring(5,7))
-//           break;
-//           case "08":
-//             taug.push(towing.date.substring(5,7))
-//           break;
-//           case "09":
-//             tsep.push(towing.date.substring(5,7))
-//           break;
-//           case "10":
-//             toct.push(towing.date.substring(5,7))
-//           break;
-//           case "11":
-//             tnov.push(towing.date.substring(5,7))
-//           break;
-//           case "12":
-//             tdec.push(towing.date.substring(5,7))
-//           break;
-//         default:
-//             break;     
-//           // code block
-//       }
-
-// })   
-// })  
+})   
+})  
 await db.collection('servs').onSnapshot((snapshot) => {
     allQuotations = []
- snapshot.forEach((doc) => allQuotations.push({ ...doc.data(), id: doc.id }));
+ snapshot.forEach((doc) => allQuotations.push({ ...doc.data(), id: doc.id ,ctime: (doc.data().date.toDate().toString())}));
     
  allQuotations.forEach((quotation)=>{
-    // switch(quotation.date.substring(5,7)) {
-    //     case "01":
-    //       qjan.push(quotation.date.substring(5,7))
-    //       break;
-    //     case "02":
+    switch(quotation.ctime.substring(4,7)) {
+        case "Jan":
+          qjan.push(quotation.ctime.substring(4,7))
+          break;
+        case "Feb":
 
-    //         qfeb.push(quotation.date.substring(5,7))
-    //       break;
-    //     case "03":
-    //         qmar.push(quotation.date.substring(5,7))
-    //       break;
-    //       case "04":
-    //         qapr.push(quotation.date.substring(5,7))
-    //       break;
-    //       case "05":
-    //         qmay.push(quotation.date.substring(5,7))
-    //       break;
-    //       case "06":
-    //         qjun.push(quotation.date.substring(5,7))
-    //       break;
-    //       case "07":
-    //         qjuly.push(quotation.date.substring(5,7))
-    //       break;
-    //       case "08":
-    //         qaug.push(quotation.date.substring(5,7))
-    //       break;
-    //       case "09":
-    //         qsep.push(quotation.date.substring(5,7))
-    //       break;
-    //       case "10":
-    //         qoct.push(quotation.date.substring(5,7))
-    //       break;
-    //       case "11":
-    //         qnov.push(quotation.date.substring(5,7))
-    //       break;
-    //       case "12":
-    //         qdec.push(quotation.date.substring(5,7))
-    //       break;
-    //     default:
-    //         break;     
-    //       // code block
-    //   }
+            qfeb.push(quotation.ctime.substring(4,7))
+          break;
+        case "Mar":
+            qmar.push(quotation.ctime.substring(4,7))
+          break;
+          case "Apr":
+            qapr.push(quotation.ctime.substring(4,7))
+          break;
+          case "May":
+            qmay.push(quotation.ctime.substring(4,7))
+          break;
+          case "Jun":
+            qjun.push(quotation.ctime.substring(4,7))
+          break;
+          case "Jul":
+            qjuly.push(quotation.ctime.substring(4,7))
+          break;
+          case "Aug":
+            qaug.push(quotation.ctime.substring(4,7))
+          break;
+          case "Sep":
+            qsep.push(quotation.ctime.substring(4,7))
+          break;
+          case "Oct":
+            qoct.push(quotation.ctime.substring(4,7))
+          break;
+          case "Nov":
+            qnov.push(quotation.ctime.substring(4,7))
+          break;
+          case "Dec":
+            qdec.push(quotation.ctime.substring(4,7))
+          break;
+        default:
+            break;     
+          // code block
+      }
 
  })
 }) 
@@ -341,3 +335,11 @@ getData();
 
 }
     
+
+module.exports.accounts_get=(req,res)=>{
+    let users =  db.collection('accounts').onSnapshot((snapshot) => {
+     const userData = []
+     snapshot.forEach((doc) => userData.push({ ...doc.data(), id: doc.id }));
+     res.render('accountslist',{userData:userData, userString: JSON.stringify(userData)})
+ })    
+}

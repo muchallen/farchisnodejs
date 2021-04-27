@@ -2,16 +2,14 @@
 
 <div class="content">
     <div class="card">
-        <div class="card-header card-header-primary">
-          <h4 class="card-title ">Users</h4>
-          <p class="card-category">Registerd Mobile App Users</p>
+        <div class="card-header card-header-primary d-flex justify-content-between align-content-center">
+          <h4 class="card-title ">Administrator Accounts</h4>
+          <h5 class="card-category"> <a href="/signup"><i class="material-icons text-success">add_circle</i></a></h5>
         </div>
    <div class="card-body">
     <table id="example" class="table " style="width:100%">
         <thead class="thead-light">
             <tr>
-                <th> Name <i class="material-icons">swap_vert</i></th>
-                <th>Mobile #<i class="material-icons">swap_vert</i></th>
                 <th>Email<i class="material-icons">swap_vert</i></th>
                 <th>Action<i class="material-icons">swap_vert</i></th> 
             </tr>
@@ -19,8 +17,6 @@
         <tbody id='tbody'>
           <% userData.forEach(function(value,i) { %>
             <tr onClick="show()">
-            <td ><%= value.fullname %></td>
-            <td><%= value.mobile %></td>
             <td><%= value.email %></td>
             <td onClick="deleteUser('<%= value.id %>')"><a class="btn btn-danger btn-sm text-white"><i class="material-icons">delete</i></a></td>
           </tr>
