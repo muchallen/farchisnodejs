@@ -78,8 +78,8 @@
             <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.contactPerson %></td>
             <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.contactNumber %></td>
             <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.vehicle %></td>
-            <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.date%></td>
-            <td><a class="btn btn-danger btn-sm text-white" onclick="deleteTow('<%=value.id%>')">Delete</a></td>
+            <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.ctime%></td>
+            <td><a class="btn btn-danger btn-sm text-white" onclick="deleteTow('<%=value.id%>')"><i class="material-icons">delete</i></a></td>
           </tr>
          <% }) %>
         </tbody>
@@ -154,7 +154,7 @@
                 </div>
                 
               </div>
-              <div class="tab-pane" id="messages">
+              <div class="tab-pane" id="map">
                   <!--Google map-->
                     <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
                       <iframe style="background-color: black; width:100%; height:100%" src="https://maps.google.com/maps?q=loc:37.751000,-97.822000&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
@@ -189,17 +189,15 @@
       var towing = JSON.parse(<%- JSON.stringify(Data2) %>)
       document.getElementById('contact').innerText=towing[index].contactPerson
       document.getElementById('phone').innerText=towing[index].contactNumber
-      document.getElementById('date').innerText=towing[index].date
+      document.getElementById('date').innerText=towing[index].ctime
       document.getElementById('vehicle').innerText=towing[index].vehicle    
       document.getElementById('details').innerText=towing[index].narration  
       document.getElementById('towing-image').innerHTML=`<img src='https://firebasestorage.googleapis.com/v0/b/farchis-bbe96.appspot.com/o/${towing[index].image}?alt=media&token=ba155af2-3a8d-4019-9e7f-85dcf77cda55' style="height: 250px; width: 230px" />`
-      document.getElementById('messages').innerHTML=`
+      document.getElementById('map').innerHTML=`
       <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
         <iframe style="background-color: black; width:100%; height:100%" src="https://maps.google.com/maps?q=loc:${towing[index].latitude},${towing[index].longitude}&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
           style="border:0" allowfullscreen></iframe>
-      </div>
-      `
-      
+      </div> ` 
     }
     $(document).ready(function() {
       navlinks= document.getElementsByClassName('nav-item'); 

@@ -50,7 +50,9 @@ module.exports.vehicle_post=(req,res)=>{
 module.exports.towing_get=(req,res)=>{
     let users =  db.collection('tows').orderBy("date","desc").onSnapshot((snapshot) => {
      const userData = []
-     snapshot.forEach((doc) => userData.push({ ...doc.data(), id: doc.id }));
+     snapshot.forEach((doc) => {
+     console.log(doc.data().date.toDate().toString())
+     userData.push({ ...doc.data(), id: doc.id ,ctime:doc.data().date.toDate().toString()})});
      console.log(userData)
      const towingString = JSON.stringify(userData)
      res.render('towing',{databse:userData, Data2:towingString})
@@ -73,7 +75,7 @@ module.exports.towing_post=(req,res)=>{
 module.exports.service_get=(req,res)=>{
     let users =  db.collection('servs').orderBy("date","desc").onSnapshot((snapshot) => {
      const userData = []
-     snapshot.forEach((doc) => userData.push({ ...doc.data(), id: doc.id }));
+     snapshot.forEach((doc) => userData.push({ ...doc.data(), id: doc.id , ctime:doc.data().date.toDate().toString()}));
      console.log(userData)
      const quoteString = JSON.stringify(userData)
      res.render('quotation',{databse:userData,Data2:quoteString})
@@ -264,48 +266,48 @@ await db.collection('servs').onSnapshot((snapshot) => {
  snapshot.forEach((doc) => allQuotations.push({ ...doc.data(), id: doc.id }));
     
  allQuotations.forEach((quotation)=>{
-    switch(quotation.date.substring(5,7)) {
-        case "01":
-          qjan.push(quotation.date.substring(5,7))
-          break;
-        case "02":
+    // switch(quotation.date.substring(5,7)) {
+    //     case "01":
+    //       qjan.push(quotation.date.substring(5,7))
+    //       break;
+    //     case "02":
 
-            qfeb.push(quotation.date.substring(5,7))
-          break;
-        case "03":
-            qmar.push(quotation.date.substring(5,7))
-          break;
-          case "04":
-            qapr.push(quotation.date.substring(5,7))
-          break;
-          case "05":
-            qmay.push(quotation.date.substring(5,7))
-          break;
-          case "06":
-            qjun.push(quotation.date.substring(5,7))
-          break;
-          case "07":
-            qjuly.push(quotation.date.substring(5,7))
-          break;
-          case "08":
-            qaug.push(quotation.date.substring(5,7))
-          break;
-          case "09":
-            qsep.push(quotation.date.substring(5,7))
-          break;
-          case "10":
-            qoct.push(quotation.date.substring(5,7))
-          break;
-          case "11":
-            qnov.push(quotation.date.substring(5,7))
-          break;
-          case "12":
-            qdec.push(quotation.date.substring(5,7))
-          break;
-        default:
-            break;     
-          // code block
-      }
+    //         qfeb.push(quotation.date.substring(5,7))
+    //       break;
+    //     case "03":
+    //         qmar.push(quotation.date.substring(5,7))
+    //       break;
+    //       case "04":
+    //         qapr.push(quotation.date.substring(5,7))
+    //       break;
+    //       case "05":
+    //         qmay.push(quotation.date.substring(5,7))
+    //       break;
+    //       case "06":
+    //         qjun.push(quotation.date.substring(5,7))
+    //       break;
+    //       case "07":
+    //         qjuly.push(quotation.date.substring(5,7))
+    //       break;
+    //       case "08":
+    //         qaug.push(quotation.date.substring(5,7))
+    //       break;
+    //       case "09":
+    //         qsep.push(quotation.date.substring(5,7))
+    //       break;
+    //       case "10":
+    //         qoct.push(quotation.date.substring(5,7))
+    //       break;
+    //       case "11":
+    //         qnov.push(quotation.date.substring(5,7))
+    //       break;
+    //       case "12":
+    //         qdec.push(quotation.date.substring(5,7))
+    //       break;
+    //     default:
+    //         break;     
+    //       // code block
+    //   }
 
  })
 }) 

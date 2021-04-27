@@ -61,7 +61,7 @@
           <h4 class="card-title ">Events</h4>
           <div class="d-flex justify-content-between">
             <p class="card-category">All Scheduled Events</p>
-            <a href="" class="btn btn-success text-white"  data-toggle="modal" data-target="#exampleModalCenter">+ New Event</a>
+            <a href="" class="btn btn-success text-white"  data-toggle="modal" data-target="#exampleModalCenter"><i class="material-icons">event</i></a>
           </div>
           
         </div>
@@ -81,7 +81,7 @@
                   <td data-toggle="modal" data-target="#exampleModalCenter2" onClick="show('<%=i %>')"><%= value.event %></td>
                   <td data-toggle="modal" data-target="#exampleModalCenter2" onClick="show('<%=i %>')"><%= value.date %></td>
                   <td data-toggle="modal" data-target="#exampleModalCenter2" onClick="show('<%=i %>')"><%= value.venue %></td>
-                  <td onclick="deleteEvent('<%= value.venue %>')"><a class="btn btn-danger btn-sm text-white">Delete</a></td>
+                  <td onclick="deleteEvent('<%= value.venue %>')"><a class="btn btn-danger btn-sm text-white"><i class="material-icons">delete</i></a></td>
                 </tr>
                <% }) %>
               </tbody>

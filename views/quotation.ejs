@@ -80,8 +80,8 @@
                   <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.mobile %></td>
                   <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.email %></td>
                   <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.vehicle%></td>
-                  <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.date%></td>
-                  <td  onClick="deleteQuote('<%= value.id%>')"><a class="btn btn-danger btn-sm text-white">Delete</a></td>
+                  <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.ctime%></td>
+                  <td  onClick="deleteQuote('<%= value.id%>')"><a class="btn btn-danger btn-sm text-white"><i class="material-icons">delete</i></a></td>
                 </tr>
                <% }) %>
               </tbody>
@@ -181,7 +181,7 @@
       var quotations = JSON.parse(<%- JSON.stringify(Data2) %>)
       document.getElementById('contact').innerText=quotations[index].contact
       document.getElementById('phone').innerText=quotations[index].mobile
-      document.getElementById('date').innerText=quotations[index].date
+      document.getElementById('date').innerText=quotations[index].ctime
       document.getElementById('vehicle').innerText=quotations[index].vehicle    
       document.getElementById('details').innerText=quotations[index].details  
       document.getElementById('email').innerText=quotations[index].email
