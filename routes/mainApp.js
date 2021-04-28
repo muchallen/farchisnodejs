@@ -14,7 +14,7 @@ router.post('/quotations',requireAuth,appController.service_post);
 router.get('/vehicles',requireAuth,appController.vehicle_get);
 router.post('/vehicles',requireAuth,appController.vehicle_post);
 router.get('/events',requireAuth,appController.events_get);
-router.get('/events',requireAuth,appController.events_post);
+router.post('/events',requireAuth,appController.events_post);
 router.get('/messages',requireAuth,appController.message_get);
 router.post('/messages',requireAuth,appController.message_post);
 router.get('/accounts',requireAuth,appController.accounts_get);

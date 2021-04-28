@@ -20,13 +20,17 @@ module.exports.users_get=(req,res)=>{
     })    
 }
 module.exports.users_post=(req,res)=>{
-    console.log(req.body.id)
-    db.collection("users").doc(req.body.id).delete().then(()=> {
-        res.status(201).send({message:"User Record successfully deleted!"})
-    }).catch((error) =>{
-        console.error("Error removing document: ", error);
-        res.status(404).send({message:"Error removing user record"})
-    });
+    var id = req.body.id
+   try{
+    db.collection("users").doc(id).delete().then(()=> 
+      res.status(201).send({message:"User Record successfully deleted!"})
+  ).catch((error) =>{
+      console.error("Error removing document: ", error);
+      return res.status(404).send({message:"Error removing user record"})
+  });
+   }catch(err){
+      console.log("paita error")
+   }
 }
 
 module.exports.vehicle_get=(req,res)=>{
@@ -60,11 +64,11 @@ module.exports.towing_get=(req,res)=>{
 
 module.exports.towing_post=(req,res)=>{
     console.log(req.body.id)
-    db.collection("tows").doc(req.body.id).delete().then(()=> {
+    db.collection("tows").doc(req.body.id).delete().then(()=> 
         res.status(201).send({message:"Towing record successfully deleted!"})
-    }).catch(function(error) {
+    ).catch(function(error) {
         console.error("Error removing document: ", error);
-        res.status(404).send({message:"Error removing towing record"})
+       return res.status(404).send({message:"Error removing towing record"})
     });
     
     
@@ -80,27 +84,26 @@ module.exports.service_get=(req,res)=>{
 }
 module.exports.service_post=(req,res)=>{
     console.log(req.body.id)
-    db.collection("servs").doc(req.body.id).delete().then(()=> {
+    db.collection("servs").doc(req.body.id).delete().then(()=> 
         res.status(200).send({message:"Quotation Record successfully deleted!"})
-    }).catch((error) =>{
+    ).catch((error) =>{
         console.error("Error removing document: ", error);
-        res.status(404).send({message:"Error removing quotation record"})
+        return res.status(404).send({message:"Error removing quotation record"})
     });
 }
 module.exports.events_get=(req,res)=>{
     let users =  db.collection('events').onSnapshot((snapshot) => {
      const userData = []
      snapshot.forEach((doc) => userData.push({ ...doc.data(), id: doc.id }));
-     console.log(userData)
      const eventsString  = JSON.stringify(userData)
      res.render('events',{eventsData:userData, Data2:eventsString})
  })    
 }
 module.exports.events_post=(req,res)=>{
     console.log(req.body.id)
-    db.collection("events").doc(req.body.id).delete().then(() =>{
-        res.status(201).send({message:"Even Record successfully deleted!"})
-    }).catch((error)=> {
+    db.collection("events").doc(req.body.id).delete().then(() =>
+        res.status(201).send({message:"Event Record successfully deleted!"})
+    ).catch((error)=> {
         console.error("Error removing document: ", error);
         res.status(404).send({message:"Error removing event record"})
     });

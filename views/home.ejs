@@ -127,31 +127,8 @@
                       <th>Owner</th>
                       <th>Contact</th>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td><%-allVehicles[0].vehicle %></td>
-                        <td><%-allVehicles[0].year %></td>
-                        <td><%-allVehicles[0].ownerName %></td>
-                        <td><%-allVehicles[0].ownerMobile %></td>
-                      </tr>
-                      <tr>
-                        <td><%-allVehicles[1].vehicle %></td>
-                        <td><%-allVehicles[1].year %></td>
-                        <td><%-allVehicles[1].ownerName %></td>
-                        <td><%-allVehicles[1].ownerMobile %></td>
-                      </tr>
-                      <tr>
-                        <td><%-allVehicles[2].vehicle %></td>
-                        <td><%-allVehicles[2].year %></td>
-                        <td><%-allVehicles[2].ownerName %></td>
-                        <td><%-allVehicles[2].ownerMobile %></td>
-                      </tr>
-                      <tr>
-                        <td><%-allVehicles[3].vehicle %></td>
-                        <td><%-allVehicles[3].year %></td>
-                        <td><%-allVehicles[3].ownerName %></td>
-                        <td><%-allVehicles[3].ownerMobile %></td>
-                      </tr>
+                    <tbody id="latest-cars">
+                    
                     </tbody>
                   </table>
                 </div>
@@ -292,6 +269,38 @@ $(document).on('click', '.navbar-toggler', function() {
   }
 
 });
+
+$(document).ready(()=>{
+document.getElementById("latest-cars").innerHTML = `
+<tr>
+  <td><%-allVehicles[0].vehicle %></td>
+  <td><%-allVehicles[0].year %></td>
+  <td><%-allVehicles[0].ownerName %></td>
+  <td><%-allVehicles[0].ownerMobile %></td>
+</tr>
+<tr>
+  <td><%-allVehicles[1].vehicle %></td>
+  <td><%-allVehicles[1].year %></td>
+  <td><%-allVehicles[1].ownerName %></td>
+  <td><%-allVehicles[1].ownerMobile %></td>
+</tr>
+<tr>
+  <td><%-allVehicles[2].vehicle %></td>
+  <td><%-allVehicles[2].year %></td>
+  <td><%-allVehicles[2].ownerName %></td>
+  <td><%-allVehicles[2].ownerMobile %></td>
+</tr>
+<tr>
+  <td><%-allVehicles[3].vehicle %></td>
+  <td><%-allVehicles[3].year %></td>
+  <td><%-allVehicles[3].ownerName %></td>
+  <td><%-allVehicles[3].ownerMobile %></td>
+</tr>
+`
+
+
+
+})
 
 // activate collapse right menu when the windows is resized
 $(window).resize(function() {
