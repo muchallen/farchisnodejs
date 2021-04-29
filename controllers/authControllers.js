@@ -18,7 +18,7 @@ var firebaseConfig = {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
    const auth = firebase.auth();
-   const bucket = firebase.storageBucket().bucket();
+  
    const db = firebase1.firestore()
 
     const maxAge = 3*24*60*60
@@ -35,13 +35,10 @@ module.exports.login_get=(req,res)=>{
     //res.cookie('authenticated','1', { maxAge: 240000, httpOnly: true });
     res.render('login')
 }
-module.exports.login_post=(req,res)=>{
-   
-    
+module.exports.login_post=(req,res)=>{  
     //login credentials 
     const credentials = req.body
-    //authenticanting
-    
+    //authenticanting   
     auth.signInWithEmailAndPassword(credentials.email,credentials.password).then(cred=>{
         if(cred.user.email){
             const token = createWebToken(cred.user.email)
@@ -49,9 +46,6 @@ module.exports.login_post=(req,res)=>{
             res.status(200).send({"email":cred.user.email});
         }
     }).catch(err=>res.status(400).send({"message" :"login failed verify your username and password"}))
-
-    
-
     
 }
 
