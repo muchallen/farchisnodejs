@@ -63,13 +63,18 @@ module.exports.towing_get=(req,res)=>{
 
 
 module.exports.towing_post=(req,res)=>{
-    console.log(req.body.id)
-    db.collection("tows").doc(req.body.id).delete().then(()=> 
+  console.log(req.body)
+    if(req.body.read){
+      return db.collection("tows").doc(req.body.id).update({
+        recieved:true
+      }).catch((err)=>console.log(err))
+    }else{
+        return db.collection("tows").doc(req.body.id).delete().then(()=> 
         res.status(201).send({message:"Towing record successfully deleted!"})
     ).catch(function(error) {
         console.error("Error removing document: ", error);
        return res.status(404).send({message:"Error removing towing record"})
-    });
+    });}
     
     
 }
@@ -83,13 +88,19 @@ module.exports.service_get=(req,res)=>{
  })    
 }
 module.exports.service_post=(req,res)=>{
-    console.log(req.body.id)
+  console.log(req.body)
+  if(req.body.read){
+    return db.collection("servs").doc(req.body.id).update({
+      recieved:true
+    }).catch((err)=>console.log(err))
+  }else{
     db.collection("servs").doc(req.body.id).delete().then(()=> 
         res.status(200).send({message:"Quotation Record successfully deleted!"})
     ).catch((error) =>{
         console.error("Error removing document: ", error);
         return res.status(404).send({message:"Error removing quotation record"})
     });
+}
 }
 module.exports.events_get=(req,res)=>{
     let users =  db.collection('events').onSnapshot((snapshot) => {

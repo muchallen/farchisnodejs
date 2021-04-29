@@ -14,6 +14,7 @@
                 <th >Mobile # <i class="material-icons">swap_vert</i></th>
                 <th>Vehicle  <i class="material-icons">swap_vert</i></th>
                 <th>Date  <i class="material-icons">swap_vert</i></th>
+                <th></th>
                 <th>Action<i class="material-icons">swap_vert</i></th> 
             </tr>
         </thead>
@@ -24,6 +25,9 @@
             <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.contactNumber %></td>
             <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.vehicle %></td>
             <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.ctime%></td>
+            <td><% if (value.recieved==true) { %>
+              <input type="checkbox" class="text-center m-auto"  />
+          <% } else { %><input type="checkbox" class="text-center m-auto" checked /><%} %></td>
             <td><a class="btn btn-danger btn-sm text-white" onclick="deleteTow('<%=value.id%>')"><i class="material-icons">delete</i></a></td>
           </tr>
          <% }) %>
@@ -129,10 +133,6 @@
         </div>
 
       </div>
-     
-      <div class="modal-footer">
-        <button type="button" id="close-button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
     </div>
   </div>
 </div>
@@ -161,7 +161,21 @@
         <iframe style="background-color: black; width:100%; height:100%" src="https://maps.google.com/maps?q=loc:${towing[index].latitude},${towing[index].longitude}&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
           style="border:0" allowfullscreen></iframe>
       </div> ` 
+
+      var data = {read:true, id:towing[index].id}
+      fetch('/towing', {
+        method: 'POST', // or 'PUT'
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+
+
     }
+    
+
+    
     $(document).ready(function() {
       navlinks= document.getElementsByClassName('nav-item'); 
       for(var i =0; i<navlinks.length; i++){

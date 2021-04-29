@@ -15,7 +15,9 @@
                       <th>Email<i class="material-icons">swap_vert</i></th>
                       <th>Vehicle  <i class="material-icons">swap_vert</i></th>
                       <th>Date  <i class="material-icons">swap_vert</i></th>
+                      <th></th>
                       <th>Action<i class="material-icons">swap_vert</i></th> 
+
                   </tr>
               </thead>
               <tbody>
@@ -26,6 +28,9 @@
                   <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.email %></td>
                   <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.vehicle%></td>
                   <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.ctime%></td>
+                  <td><% if (value.recieved==true) { %>
+                    <input type="checkbox" class="text-center m-auto"  />
+                <% } else { %><input type="checkbox" class="text-center m-auto" checked /><%} %></td>
                   <td  onClick="deleteQuote('<%= value.id%>')"><a class="btn btn-danger btn-sm text-white"><i class="material-icons">delete</i></a></td>
                 </tr>
                <% }) %>
@@ -132,6 +137,16 @@
       document.getElementById('email').innerText=quotations[index].email
       document.getElementById('service').innerText=quotations[index].service  
       document.getElementById('towing-image').innerHTML=`<img src='https://firebasestorage.googleapis.com/v0/b/farchis-bbe96.appspot.com/o/${quotations[index].image}?alt=media&token=ba155af2-3a8d-4019-9e7f-85dcf77cda55' style="height: 250px; width: 230px" />`
+      
+      var data = {read:true, id:quotations[index].id}
+      fetch('/quotations', {
+        method: 'POST', // or 'PUT'
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+
       
     }
     $(document).ready(function() {

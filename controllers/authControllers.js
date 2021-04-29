@@ -18,6 +18,7 @@ var firebaseConfig = {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
    const auth = firebase.auth();
+   const bucket = firebase.storageBucket().bucket();
    const db = firebase1.firestore()
 
     const maxAge = 3*24*60*60
