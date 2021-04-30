@@ -136,7 +136,7 @@
       document.getElementById('details').innerText=quotations[index].details  
       document.getElementById('email').innerText=quotations[index].email
       document.getElementById('service').innerText=quotations[index].service  
-      document.getElementById('towing-image').innerHTML=`<img src='https://firebasestorage.googleapis.com/v0/b/farchis-bbe96.appspot.com/o/${quotations[index].image}?alt=media&token=ba155af2-3a8d-4019-9e7f-85dcf77cda55' style="height: 250px; width: 230px" />`
+      document.getElementById('towing-image').innerHTML=`<img src='https://firebasestorage.googleapis.com/v0/b/farchis-bbe96.appspot.com/o/quotations%2F${quotations[index].image}?alt=media&token=ba155af2-3a8d-4019-9e7f-85dcf77cda55' style="height: 250px; width: 230px" />`
       
       var data = {read:true, id:quotations[index].id}
       fetch('/quotations', {

@@ -56,7 +56,7 @@ module.exports.towing_get=(req,res)=>{
      snapshot.forEach((doc) => {
      userData.push({ ...doc.data(), id: doc.id ,ctime: (doc.data().date.toDate().toString())})});
      const towingString = JSON.stringify(userData)
-     res.render('towing',{databse:userData, Data2:towingString})
+     return res.render('towing',{databse:userData, Data2:towingString})
  })    
 }
 
@@ -84,7 +84,7 @@ module.exports.service_get=(req,res)=>{
      snapshot.forEach((doc) => userData.push({ ...doc.data(), id: doc.id , ctime:doc.data().date.toDate().toString()}));
      console.log(userData)
      const quoteString = JSON.stringify(userData)
-     res.render('quotation',{databse:userData,Data2:quoteString})
+     return res.render('quotation',{databse:userData,Data2:quoteString})
  })    
 }
 module.exports.service_post=(req,res)=>{
@@ -107,17 +107,28 @@ module.exports.events_get=(req,res)=>{
      const userData = []
      snapshot.forEach((doc) => userData.push({ ...doc.data(), id: doc.id }));
      const eventsString  = JSON.stringify(userData)
-     res.render('events',{eventsData:userData, Data2:eventsString})
+     return res.render('events',{eventsData:userData, Data2:eventsString})
  })    
 }
 module.exports.events_post=(req,res)=>{
-    console.log(req.body.id)
+    
+  if(req.body.upload==true){
+    db.collection("events").doc().set({
+      event : req.body.eventname,
+      date : req.body.eventdate,
+      details:req.body.eventdetails,
+      venue:req.body.eventvenue,
+      image:req.body.image
+    }).then(()=>res.status(200).send({"message":"event was successfully created "})).catch(err=>res.status(401).send({"message":"Event creation failed "+err }))
+    
+  }else{
     db.collection("events").doc(req.body.id).delete().then(() =>
         res.status(201).send({message:"Event Record successfully deleted!"})
     ).catch((error)=> {
         console.error("Error removing document: ", error);
-        res.status(404).send({message:"Error removing event record"})
+        return res.status(404).send({message:"Error removing event record"})
     });
+  }
 }
 
 module.exports.message_get=async (req,res)=>  {

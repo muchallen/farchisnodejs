@@ -44,91 +44,77 @@
           </button>
         </div>
         <div class="modal-body">
+            <form id="form-event" >
             <div class="form-group m-2">
                 <label class="bmd-label-floating">Name</label>
-                <input type="text" name='event-name' class="form-control-1">
+                <input type="text" name='eventname' class="form-control-1">
                </div>
                <div class="form-group m-2">
                 <label class="bmd-label-floating">Venue</label>
-                <input type="text" name='event-venue' class="form-control-1">
+                <input type="text" name='eventvenue' class="form-control-1">
                </div>
                <div class="form-group m-2">
                 <label class="bmd-label-floating">Details</label>
-                <textarea type="text" name='event-details' class="form-control-1" ></textarea>
+                <textarea type="text" name='eventdetails' class="form-control-1" ></textarea>
                </div>
                <div class="form-group m-2">
                 <label class="bmd-label-floating">Date</label>
-                <input type="text" name='event-date' class="form-control-1">
+                <input type="text" name='event-date' class="form-control-1" style=" width:50%">
                </div>
                <div class="input-group mb-3">
                 <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="inputGroupFile01">
+                  <input type="file" id="imagesrcdata" onchange="document.getElementById('imagesrc').innerHTML= 'filename: '+this.files[0].name" class="custom-file-input" name="eventimage" >
                   <label class="custom-file-label" for="inputGroupFile01"><span><div class="form-group d-flex justify-content-around m-2">
                    </div></span></label>
                 </div>
               </div>
-               
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Event</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <div class="form-group m-2">
-                <label class="bmd-label-floating">Name</label>
-                <input type="text" id="event-name" name='event-name' class="form-control-1">
-               </div>
-               <div class="form-group m-2">
-                <label class="bmd-label-floating">Venue</label>
-                <input type="text" id="event-venue" name='event-venue' class="form-control-1">
-               </div>
-               <div class="form-group m-2">
-                <label class="bmd-label-floating">Details</label>
-                <textarea type="text" id="event-details" name='event-details' class="form-control-1" ></textarea>
-               </div>
-               <div class="form-group m-2">
-                <label class="bmd-label-floating">Date</label>
-                <input type="text"id="event-date" name='event-date' class="form-control-1">
-               </div>
-
-               <div class="input-group mb-3">
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="inputGroupFile01">
-                  <label class="custom-file-label" for="inputGroupFile01"><span><div class="form-group d-flex justify-content-around m-2">
-                   </div></span></label>
-                </div>
+              <strong>
+              <p id="imagesrc" class="text-center text-success"></p></strong>
+              <div class="progress">
+                <div class="progress-bar" id="progress" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
               </div>
-               
-
+              <br>
+              <div class="text-center">
+                <button type="button" onclick="addEvent()" class="btn btn-primary">Add Event</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              </div>
+            </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+         
+          
         </div>
       </div>
     </div>
   </div>
+ 
 <script src="js/plugins/jquery-3.5.1.js"></script>
 <script src="js/plugins/jquery.dataTables.min.js"></script>
 <script src="js/plugins/jqueryui.min.js"></script>
 <script src="js/plugins/rowGroup.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyB_FWRbwP_TtFeYQ8OXwj9WJuA2_wTqcrQ",
+    authDomain: "farchis-bbe96.firebaseapp.com",
+    databaseURL: "https://farchis-bbe96.firebaseio.com",
+    projectId: "farchis-bbe96",
+    storageBucket: "farchis-bbe96.appspot.com",
+    messagingSenderId: "907377570025",
+    appId: "1:907377570025:web:e51de55be0beaaedcec078",
+    measurementId: "G-Y4SV39D0FF"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+
 <script>
     $(document).ready(function() {
         $('#example').DataTable( {
             order: [[2, 'asc']],
+
            
         } );
     } );
@@ -136,6 +122,8 @@
 <script>
 
   $(document).ready(function() {
+
+   
     navlinks= document.getElementsByClassName('nav-item'); 
     for(var i =0; i<navlinks.length; i++){
       var link = navlinks[i];
@@ -161,10 +149,74 @@
         document.getElementById('event-name').value=events[index].event
         document.getElementById('event-date').value=events[index].date
         document.getElementById('event-details').value=events[index].details
-        document.getElementById('event-venue').value=events[index].venue
+        document.getElementById('event-venue').value=events[index].venue    
+    }
 
+    function addEvent(){
+      var formEvents = document.getElementById("form-event")
+      var progress1 = document.getElementById("progress")
+      
+      var eventname = formEvents.eventname.value;
+      var eventvenue = formEvents.eventvenue.value;
+      var eventdate = formEvents["event-date"].value;
+      var eventdetails = formEvents.eventdetails.value;
+      if(eventvenue==""||eventdate==""||eventdetails==""||eventname==""){
+        alert("Please complete all fields !")
+        return
+      }
+      
+      var image = formEvents.eventimage.files[0];
+      if(image.name==null){
+        alert("Please select an image")
+        return
+      }
+
+      document.getElementById("imagesrc").value=image.name
+      var imageval = ""+Math.random()*78+image.name;
+      var storageRef = firebase.storage().ref('events/'+imageval);
+      var task = storageRef.put(image);
+      var data= {upload:true, eventname, eventvenue,eventdate, eventdetails,image:imageval}
+  
+      task.on('state_changed', function progress(snapshot) {
+          var percentage = (snapshot.bytesTransferred / snapshot.totalBytes)*100
+          console.log(percentage)
+          
+          progress1.style="width :"+percentage+"%;"
+          progress1.innerHTML= percentage + "%";
+      }, function error(err){
+        alert(err)
+      },function completed (){
+       
+        fetch('/events', {
+          method: 'POST', // or 'PUT'
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+          alert('Success:'+ data.message )
+          console.log('Success:' ,data, data.status);
+          setTimeout(()=>{
+            location.reload();
+          },3000);
+        })
+        .catch((error) => {
+          alert('Failed' + error.message)
+          console.error('Error:', error.message);
+          setTimeout(()=>{
+            location.reload();
+          },3000)
+        });
+
+      })
         
     }
+
+
+    
+
 
     function  deleteEvent(id){
       const data = { id };

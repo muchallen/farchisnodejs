@@ -5,6 +5,8 @@ const firebase1 = require("firebase");
 
 
 
+
+
 var firebaseConfig = {
     apiKey: "AIzaSyB_FWRbwP_TtFeYQ8OXwj9WJuA2_wTqcrQ",
     authDomain: "farchis-bbe96.firebaseapp.com",
@@ -16,12 +18,14 @@ var firebaseConfig = {
     measurementId: "G-Y4SV39D0FF"
   };
   // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+  const app =firebase.initializeApp(firebaseConfig);
    const auth = firebase.auth();
   
    const db = firebase1.firestore()
 
-    const maxAge = 3*24*60*60
+
+    
+    const maxAge = 60*30
    const createWebToken= (email)=>{
        return jwt.sign({email:email},'c3ntricDATA', {
            expiresIn: maxAge
