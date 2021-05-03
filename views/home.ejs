@@ -271,7 +271,7 @@ $(document).on('click', '.navbar-toggler', function() {
 });
 
 $(document).ready(()=>{
-document.getElementById("latest-cars").innerHTML = `
+document.getElementById("latest-cars").innerHTML = `<% if (allVehicles[0]!=null) { %>
 <tr>
   <td><%-allVehicles[0].vehicle %></td>
   <td><%-allVehicles[0].year %></td>
@@ -296,6 +296,7 @@ document.getElementById("latest-cars").innerHTML = `
   <td><%-allVehicles[3].ownerName %></td>
   <td><%-allVehicles[3].ownerMobile %></td>
 </tr>
+<% } %>
 `
 
 

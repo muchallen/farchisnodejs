@@ -44,14 +44,14 @@
         var link = navlinks[i];
         link.className="nav-item"
       }
-      document.getElementById('users').className='nav-item active'
+      document.getElementById('accounts').className='nav-item active'
    
      } );
 
     function  deleteUser(id){
       const data = { id };
       
-      fetch('/users', {
+      fetch('/accounts', {
         method: 'POST', // or 'PUT'
         headers: {
           'Content-Type': 'application/json',

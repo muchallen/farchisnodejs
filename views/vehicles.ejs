@@ -4,7 +4,12 @@
     <div class="card">
         <div class="card-header card-header-primary">
           <h4 class="card-title ">Vehicles</h4>
-          <p class="card-category">Registered Vehicles</p>
+          <div class="d-flex justify-content-between">
+            <p class="card-category">Registered Vehicles</p>
+            <button class ="btn btn-success" onclick="location.reload(true)">
+              <i class="material-icons">autorenew</i>
+         </button></div>
+          
         </div>
         <div class="card-body">
           <table id="example" class="table " style="width:100%">
@@ -74,16 +79,16 @@
       .then(data => {
         alert('Success:'+ data.message )
         console.log('Success:' ,data, data.status);
-        setTimeout(()=>{
+       
           location.reload();
-        },3000);
+        
       })
       .catch((error) => {
         alert('Failed' + error.message)
         console.error('Error:', error.message);
-        setTimeout(()=>{
+        
           location.reload();
-        },3000)
+
       });
           }
 </script>

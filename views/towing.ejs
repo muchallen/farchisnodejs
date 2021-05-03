@@ -4,7 +4,11 @@
     <div class="card">
         <div class="card-header card-header-primary">
           <h4 class="card-title ">Towing</h4>
-          <p class="card-category">Towing Requests</p>
+          <div class="d-flex justify-content-between">
+            <p class="card-category">Towing Requests</p>
+            <button class ="btn btn-success" onclick="location.reload(true)">
+              <i class="material-icons">autorenew</i>
+              </button></div>
         </div>
    <div class="card-body">
     <table id="example" class="table " style="width:100%">
@@ -28,7 +32,7 @@
             <td><% if (value.recieved==true) { %>
               <input type="checkbox" class="text-center m-auto"  />
           <% } else { %><input type="checkbox" class="text-center m-auto" checked /><%} %></td>
-            <td><a class="btn btn-danger btn-sm text-white" onclick="deleteTow('<%=value.id%>')"><i class="material-icons">delete</i></a></td>
+            <td><a class="btn btn-danger btn-sm text-white" onclick="deleteTow('<%=value.id%>','<%=value.image%>')"><i class="material-icons">delete</i></a></td>
           </tr>
          <% }) %>
         </tbody>
@@ -140,7 +144,22 @@
 <script src="js/plugins/jquery.dataTables.min.js"></script>
 <script src="js/plugins/jqueryui.min.js"></script>
 <script src="js/plugins/rowGroup.min.js"></script>
+<script src="js/plugins/rowGroup.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase.js"></script>
 <script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyB_FWRbwP_TtFeYQ8OXwj9WJuA2_wTqcrQ",
+    authDomain: "farchis-bbe96.firebaseapp.com",
+    databaseURL: "https://farchis-bbe96.firebaseio.com",
+    projectId: "farchis-bbe96",
+    storageBucket: "farchis-bbe96.appspot.com",
+    messagingSenderId: "907377570025",
+    appId: "1:907377570025:web:e51de55be0beaaedcec078",
+    measurementId: "G-Y4SV39D0FF"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
     $(document).ready(function() {
         $('#example').DataTable( {
             order: [[2, 'asc']],
@@ -191,8 +210,16 @@
             // do something...
             location.reload()
       })
-  function  deleteTow(id){
-const data = { id };
+  function  deleteTow(id,image){
+
+    var storageRef = firebase.storage().ref('towing/'+image);
+    storageRef.delete().then(() => {
+          
+    }).catch((error) => {
+      alert(error)
+    });
+    const data = { id };
+
 
 fetch('/towing', {
   method: 'POST', // or 'PUT'
@@ -205,16 +232,16 @@ fetch('/towing', {
 .then(data => {
   alert('Success:'+ data.message )
   console.log('Success:' ,data, data.status);
-  setTimeout(()=>{
+  
     location.reload();
-  },3000);
+  
 })
 .catch((error) => {
   alert('Failed' + error.message)
   console.error('Error:', error.message);
-  setTimeout(()=>{
+  
     location.reload();
-  },3000)
+
 });
     }
 

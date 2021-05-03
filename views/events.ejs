@@ -26,7 +26,7 @@
                   <td data-toggle="modal" data-target="#exampleModalCenter2" onClick="show('<%=i %>')"><%= value.event %></td>
                   <td data-toggle="modal" data-target="#exampleModalCenter2" onClick="show('<%=i %>')"><%= value.date %></td>
                   <td data-toggle="modal" data-target="#exampleModalCenter2" onClick="show('<%=i %>')"><%= value.venue %></td>
-                  <td onclick="deleteEvent('<%= value.id %>')"><a class="btn btn-danger btn-sm text-white"><i class="material-icons">delete</i></a></td>
+                  <td onclick="deleteEvent('<%= value.id %>','<%= value.image %>')"><a class="btn btn-danger btn-sm text-white"><i class="material-icons">delete</i></a></td>
                 </tr>
                <% }) %>
               </tbody>
@@ -59,7 +59,7 @@
                </div>
                <div class="form-group m-2">
                 <label class="bmd-label-floating">Date</label>
-                <input type="text" name='event-date' class="form-control-1" style=" width:50%">
+                <input type="text" name='event-date' class="form-control-1" style=" width:60%">
                </div>
                <div class="input-group mb-3">
                 <div class="custom-file">
@@ -77,6 +77,10 @@
               <div class="text-center">
                 <button type="button" onclick="addEvent()" class="btn btn-primary">Add Event</button>
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              </div>
+              <br>
+              <div id="spin" class=" text-center">
+                
               </div>
             </form>
         </div>
@@ -155,6 +159,7 @@
     function addEvent(){
       var formEvents = document.getElementById("form-event")
       var progress1 = document.getElementById("progress")
+     
       
       var eventname = formEvents.eventname.value;
       var eventvenue = formEvents.eventvenue.value;
@@ -166,10 +171,17 @@
       }
       
       var image = formEvents.eventimage.files[0];
-      if(image.name==null){
+      
+      if(!image){
         alert("Please select an image")
         return
       }
+
+      var spindiv = document.getElementById("spin").innerHTML=`
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      `
 
       document.getElementById("imagesrc").value=image.name
       var imageval = ""+Math.random()*78+image.name;
@@ -198,28 +210,30 @@
         .then(data => {
           alert('Success:'+ data.message )
           console.log('Success:' ,data, data.status);
-          setTimeout(()=>{
-            location.reload();
-          },3000);
+          location.reload(true);
+            
         })
         .catch((error) => {
           alert('Failed' + error.message)
           console.error('Error:', error.message);
-          setTimeout(()=>{
-            location.reload();
-          },3000)
+          location.reload(true);
+            
         });
 
       })
         
     }
-
-
-    
-
-
-    function  deleteEvent(id){
+    function  deleteEvent(id,image){
+     
       const data = { id };
+
+      var storageRef = firebase.storage().ref('events/'+image);
+      
+      storageRef.delete().then(() => {
+          
+        }).catch((error) => {
+          alert(error)
+        });
       
       fetch('/events', {
         method: 'POST', // or 'PUT'
@@ -232,16 +246,13 @@
       .then(data => {
         alert('Success:'+ data.message )
         console.log('Success:' ,data, data.status);
-        setTimeout(()=>{
-          location.reload();
-        },3000);
+        location.reload(true);
       })
       .catch((error) => {
         alert('Failed' + error.message)
         console.error('Error:', error.message);
-        setTimeout(()=>{
-          location.reload();
-        },3000)
+        location.reload(true);
+        
       });
           }
     </script>
