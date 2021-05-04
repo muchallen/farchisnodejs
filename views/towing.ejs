@@ -216,7 +216,16 @@
     storageRef.delete().then(() => {
           
     }).catch((error) => {
-      alert(error)
+      swal({
+        title: "Failed",
+        text: "Failed to delete towing request",
+        icon: "warning",
+        button: "close",
+      })
+      .then((value) => {
+        location.reload(true);
+        return
+    });
     });
     const data = { id };
 
@@ -230,18 +239,27 @@ fetch('/towing', {
 })
 .then(response => response.json())
 .then(data => {
-  alert('Success:'+ data.message )
-  console.log('Success:' ,data, data.status);
-  
-    location.reload();
+  swal({
+    title: "Success",
+    text: "Towing Request was deleted successfully ",
+    icon: "success",
+    button: "close",
+  })
+  .then((value) => {
+    location.reload(true);
+});
   
 })
 .catch((error) => {
-  alert('Failed' + error.message)
-  console.error('Error:', error.message);
-  
-    location.reload();
-
+  swal({
+    title: "Failed",
+    text: "Failed to delete Towing Request",
+    icon: "warning",
+    button: "close",
+  })
+  .then((value) => {
+    location.reload(true);
+});
 });
     }
 

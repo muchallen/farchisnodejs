@@ -13,11 +13,12 @@ const db = firebase1.firestore();
 console.log(db)
 
 module.exports.users_get=(request,response)=>{
-       let users =  db.collection('users').onSnapshot((snapshot) => {
+       let users =  db.collection('users').get().then(snapshot => {
         const userData = []
         snapshot.forEach((doc) => userData.push({ ...doc.data(), id: doc.id }));
         response.render('users',{userData:userData, userString: JSON.stringify(userData)})
-    })    
+
+    }).catch((err) =>console.log)  
 }
 module.exports.users_post=(request,response)=>{
     var id = request.body.id

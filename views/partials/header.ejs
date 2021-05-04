@@ -23,22 +23,26 @@
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="demo/demo.css" rel="stylesheet" />
 
+  <!--SweetAlert js-->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
   <!-- Date Picker -->
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 
 <body class="">
   <div class="wrapper ">
-<div class="sidebar" data-color="purple" >
-  <div class="card card-profile">
-    <div class="card-avatar mt-1 p-0">
+<div class="sidebar " data-color="purple" >
+  <div class="card card-profile mt-3">
+    <div class="card-avatar mt-1 p-0 mt-4">
  
         <img class="img m-0 p-0" src="img/farchislogo.png " style="width: 100px; padding: 100px;" />
 
     </div>
     <div class="card-body mt-2 pt-2">
-      <h6 class="card-category text-gray">Welcome</h6>
-      <h4 class="card-title">Administrator</h4>
+      <h4 class="card-title">Welcome</h4>
+      <p class="text-secondary">Administrator</p>
+      
     </div>
   </div>
     <div class="sidebar-wrapper">
@@ -113,6 +117,9 @@
           </form>
           <ul class="navbar-nav">
            
+            <li><button class ="btn btn-success btn-sm p-1 " onclick="location.reload(true)">
+              <i class="material-icons">autorenew</i>
+              </button></li>
            
             <li class="nav-item dropdown">
               <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

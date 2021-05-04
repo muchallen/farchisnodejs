@@ -6,7 +6,10 @@
           <h4 class="card-title ">Events</h4>
           <div class="d-flex justify-content-between">
             <p class="card-category">All Scheduled Events</p>
-            <a href="" class="btn btn-success text-white"  data-toggle="modal" data-target="#exampleModalCenter"><i class="material-icons">event</i></a>
+            <div><button class ="btn btn-success" onclick="location.reload(true)">
+              <i class="material-icons">autorenew</i>
+              </button>
+            <a href="" class="btn btn-warning text-white"  data-toggle="modal" data-target="#exampleModalCenter"><i class="material-icons">event</i></a></div>
           </div>
           
         </div>
@@ -166,15 +169,32 @@
       var eventdate = formEvents["event-date"].value;
       var eventdetails = formEvents.eventdetails.value;
       if(eventvenue==""||eventdate==""||eventdetails==""||eventname==""){
-        alert("Please complete all fields !")
-        return
+        swal({
+          title: "Failed",
+          text: "Please Complete all fields",
+          icon: "warning",
+          button: "close",
+        })
+        .then((value) => {
+          location.reload(true);
+      });
+        
       }
       
       var image = formEvents.eventimage.files[0];
       
       if(!image){
-        alert("Please select an image")
-        return
+        swal({
+          title: "Failed",
+          text: "Please add an image",
+          icon: "warning",
+          button: "close",
+        })
+        .then((value) => {
+          location.reload(true);
+          return
+      });
+       
       }
 
       var spindiv = document.getElementById("spin").innerHTML=`
@@ -208,15 +228,28 @@
         })
         .then(response => response.json())
         .then(data => {
-          alert('Success:'+ data.message )
-          console.log('Success:' ,data, data.status);
-          location.reload(true);
-            
+          swal({
+            title: "Success",
+            text: "Event has been created successfully  ",
+            icon: "success",
+            button: "close",
+          })
+          .then((value) => {
+            location.reload(true);
+        });
+             
         })
         .catch((error) => {
-          alert('Failed' + error.message)
-          console.error('Error:', error.message);
-          location.reload(true);
+          swal({
+            title: "Failed",
+            text: "Failed to add event",
+            icon: "warning",
+            button: "close",
+          })
+          .then((value) => {
+            location.reload(true);
+        });
+      
             
         });
 
@@ -232,7 +265,17 @@
       storageRef.delete().then(() => {
           
         }).catch((error) => {
-          alert(error)
+          swal({
+            title: "Failed",
+            text: "Failed to delete event",
+            icon: "warning",
+            button: "close",
+          })
+          .then((value) => {
+            
+            location.reload(true);
+            return
+        });
         });
       
       fetch('/events', {
@@ -244,14 +287,26 @@
       })
       .then(response => response.json())
       .then(data => {
-        alert('Success:'+ data.message )
-        console.log('Success:' ,data, data.status);
-        location.reload(true);
+        swal({
+          title: "Success",
+          text: "Event was deleted successfully ",
+          icon: "success",
+          button: "close",
+        })
+        .then((value) => {
+          location.reload(true);
+      });
       })
       .catch((error) => {
-        alert('Failed' + error.message)
-        console.error('Error:', error.message);
-        location.reload(true);
+        swal({
+          title: "Failed",
+          text: "Failed to delete event",
+          icon: "warning",
+          button: "close",
+        })
+        .then((value) => {
+          location.reload(true);
+      });
         
       });
           }

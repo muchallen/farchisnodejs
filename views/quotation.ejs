@@ -178,7 +178,15 @@
     var storageRef = firebase.storage().ref('quotations/'+image);
     storageRef.delete().then(() => {
     }).catch((error) => {
-      alert(error)
+      swal({
+        title: "Failed",
+        text: "Failed to delete Quotation Request",
+        icon: "warning",
+        button: "close",
+      })
+      .then((value) => {
+        location.reload(true);
+    });
     });
       const data = { id };
       
@@ -191,18 +199,27 @@
       })
       .then(response => response.json())
       .then(data => {
-        alert('Success:'+ data.message )
-        console.log('Success:' ,data, data.status);
-        
-          location.reload();
+        swal({
+          title: "Failed",
+          text: "Quotation was deleted sucessfully ",
+          icon: "success",
+          button: "close",
+        })
+        .then((value) => {
+          location.reload(true);
+      });
       
       })
       .catch((error) => {
-        alert('Failed' + error.message)
-        console.error('Error:', error.message);
-        
-          location.reload();
-       
+        swal({
+          title: "Failed",
+          text: "Failed to delete Quotation",
+          icon: "warning",
+          button: "close",
+        })
+        .then((value) => {
+          location.reload(true);
+      });
       });
           }
 </script>

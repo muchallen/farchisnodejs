@@ -77,17 +77,27 @@
       })
       .then(response => response.json())
       .then(data => {
-        alert('Success:'+ data.message )
-        console.log('Success:' ,data, data.status);
-       
-          location.reload();
+        swal({
+          title: "Success",
+          text: "Vehicle was delete successfully deleted",
+          icon: "success",
+          button: "close",
+        })
+        .then((value) => {
+          location.reload(true);
+      });
         
       })
       .catch((error) => {
-        alert('Failed' + error.message)
-        console.error('Error:', error.message);
-        
-          location.reload();
+        swal({
+          title: "Failed",
+          text: "Failed to delete vehicle",
+          icon: "warning",
+          button: "close",
+        })
+        .then((value) => {
+          location.reload(true);
+      });
 
       });
           }
