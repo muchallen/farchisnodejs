@@ -4,6 +4,8 @@ const { json, text } = require('body-parser');
 
 const { render } = require('ejs');
 
+require('dotenv').config();
+
 // requestuired for side-effects
 require("firebase/firestore");
 
@@ -370,4 +372,28 @@ module.exports.accounts_get=(request,response)=>{
      snapshot.forEach((doc) => userData.push({ ...doc.data(), id: doc.id }));
      response.render('accountslist',{userData:userData, userString: JSON.stringify(userData)})
  })    
+}
+
+
+module.exports.sms_post = (req, res) =>{
+  // Twilio Credentials
+// To set up environmental variables, see http://twil.io/secure
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+
+// require the Twilio module and create a REST client
+const client = require('twilio')(accountSid, authToken);
+
+client.messages
+  .create({
+    to: '+2630783281382',
+    from: '+14159933478',
+    body: 'Hello from Allen',
+  })
+  .then(message => console.log(message.sid));
+
+
+  console.log("zvaita")
+
+  return
 }

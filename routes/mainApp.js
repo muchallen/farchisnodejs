@@ -18,7 +18,7 @@ router.post('/events',requireAuth,appController.events_post);
 router.get('/messages',requireAuth,appController.message_get);
 router.post('/messages',requireAuth,appController.message_post);
 router.get('/accounts',requireAuth,appController.accounts_get);
-
+router.get('/sms',requireAuth,appController.sms_post);
 
 
 
