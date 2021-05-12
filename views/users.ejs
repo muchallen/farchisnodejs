@@ -57,40 +57,55 @@
      } );
 
     function  deleteUser(id){
-      const data = { id };
       
-      fetch('/users', {
-        method: 'POST', // or 'PUT'
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this user's details!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
       })
-      .then(response => response.json())
-      .then(data => {
-        swal({
-          title: "Success",
-          text: "User was deleted successfully",
-          icon: "success",
-          button: "close",
-        })
-        .then((value) => {
-          location.reload(true);
-      });
+      .then((willDelete) => {
+        if (willDelete) {
+          const data = { id }; 
+          fetch('/users', {
+            method: 'POST', // or 'PUT'
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          })
+          .then(response => response.json())
+          .then(data => {
+            swal({
+              title: "Success",
+              text: "User was deleted successfully",
+              icon: "success",
+              button: "close",
+            })
+            .then((value) => {
+              location.reload(true);
+          });     
+          })
+          .catch((error) => {
+            swal({
+              title: "Failed",
+              text: "Failed to delete user",
+              icon: "warning",
+              button: "close",
+            })
+            .then((value) => {
+              location.reload(true);
+          });
        
-      })
-      .catch((error) => {
-        swal({
-          title: "Failed",
-          text: "Failed to delete user",
-          icon: "warning",
-          button: "close",
-        })
-        .then((value) => {
-          location.reload(true);
+          });
+        } else {
+          return
+        }
       });
-   
-      });
+      
+      
           }
 
 

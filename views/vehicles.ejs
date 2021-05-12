@@ -66,40 +66,58 @@
      } );
 
     function  deleteCar(id){
-      const data = { id };
-      
-      fetch('/vehicles', {
-        method: 'POST', // or 'PUT'
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this imaginary file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
       })
-      .then(response => response.json())
-      .then(data => {
-        swal({
-          title: "Success",
-          text: "Vehicle was delete successfully deleted",
-          icon: "success",
-          button: "close",
-        })
-        .then((value) => {
-          location.reload(true);
-      });
-        
-      })
-      .catch((error) => {
-        swal({
-          title: "Failed",
-          text: "Failed to delete vehicle",
-          icon: "warning",
-          button: "close",
-        })
-        .then((value) => {
-          location.reload(true);
+      .then((willDelete) => {
+        if (willDelete) {
+          const data = { id };
+          fetch('/vehicles', {
+            method: 'POST', // or 'PUT'
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          })
+          .then(response => response.json())
+          .then(data => {
+            swal({
+              title: "Success",
+              text: "Vehicle was delete successfully deleted",
+              icon: "success",
+              button: "close",
+            })
+            .then((value) => {
+              location.reload(true);
+          });
+            
+          })
+          .catch((error) => {
+            swal({
+              title: "Failed",
+              text: "Failed to delete vehicle",
+              icon: "warning",
+              button: "close",
+            })
+            .then((value) => {
+              location.reload(true);
+          });
+    
+          });
+        } else {
+          return
+        }
       });
 
-      });
+
+
+
+      
           }
 </script>
 

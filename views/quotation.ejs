@@ -3,7 +3,7 @@
 <div class="content">
     <div class="card">
         <div class="card-header card-header-primary">
-          <h4 class="card-title ">Quotaions</h4>
+          <h4 class="card-title ">Quotations</h4>
           <div class="d-flex justify-content-between"><p class="card-category">Quotation Requests</p>
             <button class ="btn btn-success" onclick="location.reload(true)">
               <i class="material-icons">autorenew</i>
@@ -208,53 +208,77 @@
      } );
 
     function  deleteQuote(id,image){
-    var storageRef = firebase.storage().ref('quotations/'+image);
-    storageRef.delete().then(() => {
-    }).catch((error) => {
+
       swal({
-        title: "Failed",
-        text: "Failed to delete Quotation Request",
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this Quotation data!",
         icon: "warning",
-        button: "close",
+        buttons: true,
+        dangerMode: true,
       })
-      .then((value) => {
-        location.reload(true);
-    });
-    });
-      const data = { id };
-      
-      fetch('/quotations', {
-        method: 'POST', // or 'PUT'
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-      .then(response => response.json())
-      .then(data => {
-        swal({
-          title: "Failed",
-          text: "Quotation was deleted sucessfully ",
-          icon: "success",
-          button: "close",
-        })
-        .then((value) => {
-          location.reload(true);
+      .then((willDelete) => {
+        if (willDelete) {
+          var storageRef = firebase.storage().ref('quotations/'+image);
+          storageRef.delete().then(() => {
+          }).catch((error) => {
+            swal({
+              title: "Failed",
+              text: "Failed to delete Quotation Request",
+              icon: "warning",
+              button: "close",
+            })
+            .then((value) => {
+              location.reload(true);
+          });
+          });
+            const data = { id };
+            
+            fetch('/quotations', {
+              method: 'POST', // or 'PUT'
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+              swal({
+                title: "Failed",
+                text: "Quotation was deleted sucessfully ",
+                icon: "success",
+                button: "close",
+              })
+              .then((value) => {
+                location.reload(true);
+            });
+            
+            })
+            .catch((error) => {
+              swal({
+                title: "Failed",
+                text: "Failed to delete Quotation",
+                icon: "warning",
+                button: "close",
+              })
+              .then((value) => {
+                location.reload(true);
+            });
+            });
+                
+        } else {
+         return
+        }
       });
-      
-      })
-      .catch((error) => {
-        swal({
-          title: "Failed",
-          text: "Failed to delete Quotation",
-          icon: "warning",
-          button: "close",
-        })
-        .then((value) => {
-          location.reload(true);
-      });
-      });
-          }
+
+    }
+
+
+
+
+
+
+
+    
 </script>
 
 
