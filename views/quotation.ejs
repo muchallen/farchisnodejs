@@ -110,31 +110,51 @@
                 <div class="row p-4 bg-light">
                   <div class="col-md-5 p-4 " id="towing-image" style="height: 250px; width: 230px;overflow:auto;
                   ">
-                    hello
                   </div>
                   <div class="col-md-7 ">
                     <div class="row">
-                      <div class="col-md-4 ">
-                        <h5>Name</h5>
-                        <h5>Number</h5>
-                        <h5>Date</h5>
-                        <h5>Email</h5>
-                        <h5>Vehicle</h5>
-                        <h5>Service</h5>
-                      </div>
-                      <div class="col-md-6">
-                        <p id="contact">Contact</p>
-                        <p id="phone">0783281382</p>
-                        <p id="date">10 August</p>
-                        <p id="email">10 August</p>
-                        <p id="vehicle">BMW</p>
-                        <p id="service">10 August</p>
-                      </div>
-                    </div>
+                      <table>
+                        <thead>
+                            <th class="col-md-4"></th>
+                            <th class="col-md-8"></th>
+                        </thead>
+                        <tbody class="card p-3">
+                          <tr class="row">
+                            <td class="col-md-6"><h6>Name</h6></td>
+                            <td class="col-md-6"><p id="contact">Allensahdjhasgdjasgdjhgasjdhgas</p></td>
+                          </tr>
+                          <tr class="row">
+                            <td class="col-md-6"><h6>Number</h6></td>
+                            <td class="col-md-6"><p id="phone"> Allensahdjhasgdjasgdjhgasjdhgas</p></td>
+      
+                          </tr>
+                          <tr class="row">
+                            <td class="col-md-6"><h6>Email</h6></td>
+                            <td class="col-md-6"><p id="email"> Allensahdjhasgdjasgdjhgasjdhgas</p></td>
+      
+                          </tr>
+                          <tr class="row">
+                            <td class="col-md-6"><h6>Date Time</h6></td>
+                            <td class="col-md-6"><p  id="date">Allensahdjhasgdjasgdjhgasjdhgas</p></td>
+                          </tr>
+                          <tr class="row">
+                            <td class="col-md-6"><h6>Vehicle</h6></td>
+                            <td class="col-md-6"><p id="vehicle"> Allensahdjhasgdjasgdjhgasjdhgas</p></td>
+                          </tr>
+                          <tr class="row">
+                            <td class="col-md-6"><h6>Service</h6></td>
+                            <td class="col-md-6"><p id="service"> Allensahdjhasgdjasgdjhgasjdhgas</p></td>
+                          </tr>
+                          
+                        </tbody>
 
-                    <h5 class="mt-4 mb-0 pb-0"><strong>Details</strong></h5>
+                    </table>
+                    
+
+                  </div>
+                  <div class="text-center"><h6>Details</h6>
                     <p id="details">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatum, quae.</p>
-
+                    </div>
                   </div>
                 </div>
                 
@@ -211,7 +231,7 @@
 
       swal({
         title: "Are you sure?",
-        text: "Once deleted, you will not be able to recover this Quotation data!",
+        text: "Once deleted, you will not be able to recover this Quotation details!",
         icon: "warning",
         buttons: true,
         dangerMode: true,
@@ -243,7 +263,7 @@
             .then(response => response.json())
             .then(data => {
               swal({
-                title: "Failed",
+                title: "Success",
                 text: "Quotation was deleted sucessfully ",
                 icon: "success",
                 button: "close",
