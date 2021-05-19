@@ -6,6 +6,7 @@
           <h4 class="card-title ">Quotations</h4>
           <div class="d-flex justify-content-between"><p class="card-category">Quotation Requests</p>
            </div>
+         
         </div>
         <div class="card-body">
           <table id="example" class="table " style="width:100%">
@@ -30,8 +31,12 @@
                   <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.vehicle%></td>
                   <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.ctime%></td>
                   <td><% if (value.received==true) { %>
-                    <input type="checkbox" class="text-center m-auto"  />
-                <% } else { %><input type="checkbox" class="text-center m-auto" checked /><%} %></td>
+                    <i class="material-icons text-success mt-3 mx-2">
+                      mark_email_read
+                    </i>
+                <% } else { %><i class="material-icons text-danger mt-3 mx-2">
+                  email
+                </i><%} %></td>
                   <td  onClick="deleteQuote('<%= value.id%>','<%= value.image%>')"><a class="btn btn-danger btn-sm text-white"><i class="material-icons">delete</i></a></td>
                 </tr>
                <% }) %>

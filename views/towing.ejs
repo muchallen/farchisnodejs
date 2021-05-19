@@ -29,8 +29,12 @@
             <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.vehicle %></td>
             <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.ctime%></td>
             <td><% if (value.received==true) { %>
-              <input type="checkbox" class="text-center m-auto"  />
-          <% } else { %><input type="checkbox" class="text-center m-auto" checked /><%} %></td>
+              <i class="material-icons text-success mt-3 mx-2">
+                mark_email_read
+              </i>
+          <% } else { %><i class="material-icons text-danger mt-3 mx-2">
+            email
+          </i><%} %></td>
             <td><a class="btn btn-danger btn-sm text-white" onclick="deleteTow('<%=value.id%>','<%=value.image%>')"><i class="material-icons">delete</i></a></td>
           </tr>
          <% }) %>

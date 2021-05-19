@@ -53,6 +53,20 @@
         if(tow.data().received==false) 
         tows.push(tow)
       })
+      if(tows.length>0){
+        $.notify({
+          icon: "add_alert",
+          message: "You have "+ tows.length +" towing requests"
+      
+      },{
+          type: 'danger',
+          timer: 3000,
+          placement: {
+              from: "top",
+              align: "right"
+          }
+      });
+       }
        return document.getElementById("towing-badge").innerHTML=tows.length
     })
     firestore.collection('servs').onSnapshot((snap)=>{
@@ -61,6 +75,20 @@
        if(tow.data().received==false) 
        servs.push(tow)
      })
+     if(servs.length>0){
+      $.notify({
+        icon: "add_alert",
+        message: "You have "+ servs.length +" quotation requests"
+    
+    },{
+        type: 'warning',
+        timer: 3000,
+        placement: {
+            from: "top",
+            align: "right"
+        }
+    });
+     }
       return document.getElementById("service-badge").innerHTML=servs.length
    })
 
@@ -102,6 +130,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 <!-- Library for adding dinamically elements -->
 <script src="js/plugins/arrive.min.js"></script>
+<script src="js/plugins/bootstrap-notify.js"></script>
+
 <!--  Google Maps Plugin    -->
 <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 <!-- Chartist JS -->
