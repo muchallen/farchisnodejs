@@ -6,9 +6,7 @@
           <h4 class="card-title ">Towing</h4>
           <div class="d-flex justify-content-between">
             <p class="card-category">Towing Requests</p>
-            <button class ="btn btn-success" onclick="location.reload(true)">
-              <i class="material-icons">autorenew</i>
-              </button></div>
+           </div>
              
         </div>
    <div class="card-body">
@@ -30,7 +28,7 @@
             <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.contactNumber %></td>
             <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.vehicle %></td>
             <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.ctime%></td>
-            <td><% if (value.recieved==true) { %>
+            <td><% if (value.received==true) { %>
               <input type="checkbox" class="text-center m-auto"  />
           <% } else { %><input type="checkbox" class="text-center m-auto" checked /><%} %></td>
             <td><a class="btn btn-danger btn-sm text-white" onclick="deleteTow('<%=value.id%>','<%=value.image%>')"><i class="material-icons">delete</i></a></td>
@@ -61,17 +59,18 @@
                 <div class="nav-tabs-navigation">
                   <div class="nav-tabs-wrapper">
                     
-                    <ul class="nav nav-tabs" data-tabs="tabs">
-                      <li class="nav-item">
-                        <a class="nav-link active" href="#profile" data-toggle="tab">
+                    <ul class="nav  " data-tabs="tabs">
+                      <li class="nav-item ">
+                        <a class="nav-link active text-white" href="#profile" data-toggle="tab">
                           <i class="material-icons">sms</i> Details
-                          <div class="ripple-container"></div>
+                          
                         </a>
                       </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#messages" data-toggle="tab">
+                      <li class="nav-item ">
+                        <a class="nav-link text-white
+                        " href="#messages" data-toggle="tab">
                           <i class="material-icons">code</i> Location
-                          <div class="ripple-container"></div>
+                          
                         </a>
                       </li>
                     </ul>

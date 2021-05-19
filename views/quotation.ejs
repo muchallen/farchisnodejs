@@ -5,9 +5,7 @@
         <div class="card-header card-header-primary">
           <h4 class="card-title ">Quotations</h4>
           <div class="d-flex justify-content-between"><p class="card-category">Quotation Requests</p>
-            <button class ="btn btn-success" onclick="location.reload(true)">
-              <i class="material-icons">autorenew</i>
-              </button></div>
+           </div>
         </div>
         <div class="card-body">
           <table id="example" class="table " style="width:100%">
@@ -31,7 +29,7 @@
                   <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.email %></td>
                   <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.vehicle%></td>
                   <td data-toggle="modal" data-target="#exampleModalCenter" onClick="showDetails('<%=i %>')"><%= value.ctime%></td>
-                  <td><% if (value.recieved==true) { %>
+                  <td><% if (value.received==true) { %>
                     <input type="checkbox" class="text-center m-auto"  />
                 <% } else { %><input type="checkbox" class="text-center m-auto" checked /><%} %></td>
                   <td  onClick="deleteQuote('<%= value.id%>','<%= value.image%>')"><a class="btn btn-danger btn-sm text-white"><i class="material-icons">delete</i></a></td>
@@ -91,9 +89,9 @@
             <div class="nav-tabs-navigation">
               <div class="nav-tabs-wrapper">
                 
-                <ul class="nav nav-tabs" data-tabs="tabs">
+                <ul class="nav " data-tabs="tabs">
                   <li class="nav-item">
-                    <a class="nav-link active card-category" href="#profile" data-toggle="tab">
+                    <a class="nav-link active text-white card-category" href="#profile" data-toggle="tab">
                       Details
                       <div class="ripple-container"></div>
                     </a>

@@ -69,7 +69,7 @@ module.exports.towing_post=(request,response)=>{
   console.log(request.body)
     if(request.body.read){
       return db.collection("tows").doc(request.body.id).update({
-        recieved:true
+        received:true
       }).catch((err)=>console.log(err))
     }else{
         return db.collection("tows").doc(request.body.id).delete().then(()=> 
@@ -93,7 +93,7 @@ module.exports.service_post=(request,response)=>{
   console.log(request.body)
   if(request.body.read){
     return db.collection("servs").doc(request.body.id).update({
-      recieved:true
+      received:true
     }).catch((err)=>console.log(err))
   }else{
     return db.collection("servs").doc(request.body.id).delete().then(()=> 

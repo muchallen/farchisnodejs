@@ -26,6 +26,49 @@
   </footer>
 </div>
 </div>
+<script src="https://www.gstatic.com/firebasejs/8.4.3/firebase.js"></script>
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyB_FWRbwP_TtFeYQ8OXwj9WJuA2_wTqcrQ",
+    authDomain: "farchis-bbe96.firebaseapp.com",
+    databaseURL: "https://farchis-bbe96.firebaseio.com",
+    projectId: "farchis-bbe96",
+    storageBucket: "farchis-bbe96.appspot.com",
+    messagingSenderId: "907377570025",
+    appId: "1:907377570025:web:e51de55be0beaaedcec078",
+    measurementId: "G-Y4SV39D0FF"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  </script>
+
+
+  <script>
+    $(document).ready(function() {
+      
+      const firestore = firebase.firestore()
+       firestore.collection('tows').onSnapshot((snap)=>{
+       var tows = [] 
+       snap.forEach(tow=>{
+        if(tow.data().received==false) 
+        tows.push(tow)
+      })
+       return document.getElementById("towing-badge").innerHTML=tows.length
+    })
+    firestore.collection('servs').onSnapshot((snap)=>{
+      var servs = [] 
+      snap.forEach(tow=>{
+       if(tow.data().received==false) 
+       servs.push(tow)
+     })
+      return document.getElementById("service-badge").innerHTML=servs.length
+   })
+
+
+
+    })
+    
+  </script>
 
 <!--   Core JS Files   -->
 <script src="js/core/jquery.min.js"></script>
