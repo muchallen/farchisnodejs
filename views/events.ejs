@@ -45,26 +45,27 @@
           </button>
         </div>
         <div class="modal-body">
-            <form id="form-event" >
+          <div>
+            <form action="/" id="form-event">
             <div class="form-group m-2">
                 <label class="bmd-label-floating">Name</label>
-                <input type="text" name='eventname' class="form-control-1">
+                <input type="text" name='eventname' id="eventname" class="form-control-1">
                </div>
                <div class="form-group m-2">
                 <label class="bmd-label-floating">Venue</label>
-                <input type="text" name='eventvenue' class="form-control-1">
+                <input type="text" name='eventvenue' id='eventvenue' class="form-control-1">
                </div>
                <div class="form-group m-2">
                 <label class="bmd-label-floating">Details</label>
-                <textarea type="text" name='eventdetails' class="form-control-1" ></textarea>
+                <textarea type="text" name='eventdetails' id='eventdetails' class="form-control-1" ></textarea>
                </div>
                <div class="form-group m-2">
                 <label class="bmd-label-floating">Date</label>
-                <input type="text" name='event-date' class="form-control-1" style=" width:60%">
+                <input type="text" name='event-date' id='eventdate' class="form-control-1" style=" width:60%">
                </div>
                <div class="input-group mb-3">
                 <div class="custom-file">
-                  <input type="file" id="imagesrcdata" onchange="document.getElementById('imagesrc').innerHTML= 'filename: '+this.files[0].name" class="custom-file-input" name="eventimage" >
+                  <input type="file"  id="eventimage" onchange="document.getElementById('imagesrc').innerHTML= 'filename: '+this.files[0].name" class="custom-file-input" name="eventimage" >
                   <label class="custom-file-label" for="inputGroupFile01"><span><div class="form-group d-flex justify-content-around m-2">
                    </div></span></label>
                 </div>
@@ -76,14 +77,15 @@
               </div>
               <br>
               <div class="text-center">
-                <button type="button" onclick="addEvent()" class="btn btn-primary">Add Event</button>
+                <button type="button" id="btnaddevent" onclick="addEvent()" class="btn btn-primary">Add Event</button>
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
               </div>
               <br>
               <div id="spin" class=" text-center">
-                
               </div>
             </form>
+            </div>
+
         </div>
         <div class="modal-footer">
          
@@ -148,6 +150,8 @@
         }
       });
     });
+
+ 
     function show(value){
         var index = parseInt(value);
         var events = JSON.parse(<%- JSON.stringify(Data2) %>)
@@ -162,10 +166,10 @@
       var progress1 = document.getElementById("progress")
      
       
-      var eventname = formEvents.eventname.value;
-      var eventvenue = formEvents.eventvenue.value;
-      var eventdate = formEvents["event-date"].value;
-      var eventdetails = formEvents.eventdetails.value;
+      var eventname = document.getElementById("eventname").value
+      var eventvenue = document.getElementById("eventvenue").value
+      var eventdate = document.getElementById("eventdate").value
+      var eventdetails = document.getElementById("eventdetails").value
       if(eventvenue==""||eventdate==""||eventdetails==""||eventname==""){
         swal({
           title: "Failed",
@@ -179,7 +183,7 @@
         
       }
       
-      var image = formEvents.eventimage.files[0];
+      var image = document.getElementById("eventimage").files[0];
       
       if(!image){
         swal({
@@ -205,24 +209,24 @@
       var imageval = ""+Math.random()*78+image.name;
       var storageRef = firebase.storage().ref('events/'+imageval);
       var task = storageRef.put(image);
-      var data= {upload:true, eventname, eventvenue,eventdate, eventdetails,image:imageval}
+      var data2= {upload:true, eventname, eventvenue,eventdate, eventdetails,image:imageval}
   
       task.on('state_changed', function progress(snapshot) {
           var percentage = (snapshot.bytesTransferred / snapshot.totalBytes)*100
-          console.log(percentage)
+          console.log(data2)
           
           progress1.style="width :"+percentage+"%;"
           progress1.innerHTML= percentage + "%";
       }, function error(err){
         alert(err)
       },function completed (){
-       
+        console.log(data2)
         fetch('/events', {
           method: 'POST', // or 'PUT'
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify(data2),
         })
         .then(response => response.json())
         .then(data => {
@@ -308,7 +312,9 @@
         
       });
           }
-    </script>
+    
+     
+        </script>
 
 
 <%- include('partials/footer'); -%>
